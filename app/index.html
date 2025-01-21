@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GalloConta</title>
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="favicon.png" alt="Logo de GalloConta" class="favicon">
+            <h1 class="title">GalloConta</h1>
+        </header>
+        <h2>Calcula cuántas grullas hay en una imagen</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label for="file">Selecciona un archivo (imagen):</label>
+            <input type="file" id="file" name="file" required>
+            <button type="submit">Contar grullas</button>
+        </form>
+        <div id="progress" style="display: none;">
+            <div>Procesando la imagen, por favor espera...</div>
+            <div class="loader"></div>
+        </div>
+        <div id="result">
+            <img id="predictedImage" src="" alt="Imagen Predicha" style="max-width:100%;">
+            
+            <div id="feedback" style="display: none;">
+                <div>¿Te gusta el resultado?</div>
+                <div>
+                    <button id="likeButton"><i class="fas fa-thumbs-up"></i>Si</button>
+                    <button id="dislikeButton"><i class="fas fa-thumbs-down"></i>No</button>
+                </div>
+            </div>
+            <div id="reload" style="display: none;">
+                <button id="reloadButton"><i class="fas fa-sync-alt"></i>Subir otra foto</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

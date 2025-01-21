@@ -1,0 +1,7 @@
+Flask >= 2.2
+gunicorn==20.1.0
+flask-cors
+ftpretty
+opencv-contrib-python-headless
+ultralytics
+kagglehub

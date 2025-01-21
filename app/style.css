@@ -1,0 +1,159 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    margin-top:50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="file"] {
+    margin: 20px 0;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin:20px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size:1em;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#result {
+    display: none;
+    margin-top: 30px;
+}
+
+#result img {
+    display: block;
+    margin: 20px auto;
+}
+
+#predictions {
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+}
+
+#progress {
+    font-size: 18px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.loader {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+    margin-top: 30px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#feedback, #reload {
+    justify-content: center;
+    gap: 20px; 
+    margin-top: 20px;
+}
+
+#feedback button, #reload_button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 10px;
+}
+
+#likeButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#likeButton:hover {
+    background-color: #45a049;
+}
+
+#dislikeButton {
+    background-color: #f44336;
+    color: white;
+}
+
+#dislikeButton:hover {
+    background-color: #e53935;
+}
+
+#likeButton i {
+    margin-right: 8px;
+}
+
+#dislikeButton i {
+    margin-right: 8px;
+}
+
+#reloadButton i {
+    margin-right: 8px;
+}
+
+#feedback div {
+    margin-top: 20px;
+    display:flex;
+    justify-content: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.favicon {
+    width: 60px;
+    height: 60px;
+}
+
+.title {
+    font-family: 'Arial', sans-serif; 
+    color: #333;
+}
