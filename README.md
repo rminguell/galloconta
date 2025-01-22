@@ -21,6 +21,7 @@ This app helps automate crane counting, aiding researchers and conservationists 
 - [Dataset](#dataset)
 - [Model](#model)
 - [Deploy](#deploy)
+- [Video inference](#video-inference)
 - [Acknowledgements](#acknowledgements)
 
 ## Dataset
@@ -95,6 +96,56 @@ Ultralytics 8.3.65 🚀 Python-3.11.11 torch-2.5.1+cu121 CUDA:0 (NVIDIA A100-SXM
 ## Deploy
 
 The app is deployed on **Google Cloud Run**, creating a real-time API endpoint that allows users to upload images and receive crane counting predictions quickly. This cloud-based solution ensures scalability and easy updates.
+
+## Video inference
+
+Here is the code used for video inference:
+
+```python
+from ultralytics import YOLO
+from ultralytics.solutions import object_counter
+import ffmpeg
+import cv2
+
+input_path='video.mp4'
+output_path='video.avi'
+model_path='GRULLA.pt'
+
+probe = ffmpeg.probe(video_path, v='error', select_streams='v:0', show_entries='stream=width,height')
+width = probe['streams'][0]['width']
+height = probe['streams'][0]['height']
+
+cap = cv2.VideoCapture(input_path)
+assert cap.isOpened(), "Error reading video file"
+w, h, fps = (int(cap.get(x)) for x in (cv2.CAP_PROP_FRAME_WIDTH, cv2.CAP_PROP_FRAME_HEIGHT, cv2.CAP_PROP_FPS))
+
+region_points = [(100, 0), (100, height)]
+
+video_writer = cv2.VideoWriter(output_path, cv2.VideoWriter_fourcc(*"mp4v"), fps, (w, h))
+
+counter = object_counter.ObjectCounter(
+    show=False,
+    region=region_points,
+    model=model_path,
+    show_in=True,
+    show_out=True,
+    line_width=1,
+    conf=0.17,
+    iou=0.55
+)
+
+while cap.isOpened():
+    success, im0 = cap.read()
+    if not success:
+        print("Video frame is empty or video processing has been successfully completed.")
+        break
+    im0 = counter.count(im0)
+    video_writer.write(im0)
+
+cap.release()
+video_writer.release()
+cv2.destroyAllWindows()
+```
 
 ## Acknowledgements
 
