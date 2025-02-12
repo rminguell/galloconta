@@ -26,7 +26,7 @@ def predict(image_path, conf=config.DEFAULT_CONF, iou=config.DEFAULT_IOU):
 
     for result in results:
         object_count = len(result.boxes.cls)
-        annotator = Annotator(image, line_width=5)
+        annotator = Annotator(resized, line_width=5)
         annotator.text_label((0, 0, 400, 100), label=f'{object_count} grullas', margin=10)
         annotated_image = result.plot(show=False, labels=False, line_width=1)
         output_image_path = image_path.replace('input', 'output')
