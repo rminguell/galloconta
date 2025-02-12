@@ -7,6 +7,7 @@ DEFAULT_IOU = 0.3
 # File Directories
 INPUT_FOLDER = './input'
 OUTPUT_FOLDER = './output'
+MODEL_FOLDER = './model'
 
 # CORS Configuration
 CORS_ORIGINS = ["https://galloconta-419024990899.europe-southwest1.run.app/", "https://rminguell.github.io"]

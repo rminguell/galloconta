@@ -1,5 +1,6 @@
 import cv2
 import os
+import shutil
 from ultralytics import YOLO
 from ultralytics.utils.plotting import Annotator
 import kagglehub
@@ -10,9 +11,18 @@ def download_model():
     print(f"{config.DOWNLOAD_MSG} {model_path}")
     return model_path
 
-def load_model():
-    model_path = download_model()
-    return YOLO(f"{model_path}/{config.MODEL_FILE_NAME}.pt")
+def load_model(update=False):
+    local_model_path = f"{config.MODEL_FOLDER}/{config.MODEL_FILE_NAME}.pt"
+    
+    if update or not os.path.exists(local_model_path):
+        downloaded_model_dir = download_model()
+        downloaded_model_file = f"{downloaded_model_dir}/{config.MODEL_FILE_NAME}.pt"
+
+        if os.path.exists(downloaded_model_file):
+            os.makedirs(os.path.dirname(local_model_path), exist_ok=True)
+            shutil.move(downloaded_model_file, local_model_path)
+    
+    return YOLO(local_model_path)
 
 def predict(image_path, conf=config.DEFAULT_CONF, iou=config.DEFAULT_IOU):
     image = cv2.imread(image_path)

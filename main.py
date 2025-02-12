@@ -1,9 +1,10 @@
 import os
 import time
 from flask import Flask, request, render_template, send_from_directory, jsonify
-from inference import predict
+from inference import predict, load_model
 from flask_cors import CORS
 from ftpretty import ftpretty
+from functools import wraps
 import config
 
 def clear_folder(folder_path):
@@ -14,6 +15,15 @@ def clear_folder(folder_path):
                 os.remove(file_path)
         except Exception as e:
             print(config.FTP_UPLOAD_ERROR.format(file_path, e))
+
+def authenticate(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        auth = request.authorization
+        if not auth or auth.username !=  os.getenv('BASIC_AUTH_USER') or auth.password !=  os.getenv('BASIC_AUTH_PASS'):
+            return jsonify({"message": "Authentication required"}), 401
+        return f(*args, **kwargs)
+    return decorated_function
 
 app = Flask(__name__, template_folder='app')
 
@@ -99,6 +109,12 @@ def uploaded_file(filename):
 @app.route('/output/<filename>')
 def output_file(filename):
     return send_from_directory(config.OUTPUT_FOLDER, filename)
+
+@app.route('/update', methods=['GET'])
+@authenticate
+def update_model():
+    load_model(update=True)
+    return jsonify({"message": "Model updated successfully"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
