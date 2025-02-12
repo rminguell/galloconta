@@ -47,6 +47,26 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     document.getElementById('file').value = '';
 });
 
+document.getElementById('param_1').addEventListener('input', function() {
+    document.getElementById('param_1_text').value = this.value;
+});
+
+document.getElementById('param_2').addEventListener('input', function() {
+    document.getElementById('param_2_text').value = this.value;
+});
+
+document.getElementById('file-upload').addEventListener('input', function() {
+    document.getElementById('file_name').textContent = this.files[0].name
+    if (this.files[0].name) {
+        document.getElementById('select-file-btn').style.display = 'none';
+        document.getElementById('predictButton').style.display = 'block';
+    }
+});
+
+document.getElementById('select-file-btn').addEventListener('click', function() {
+    document.getElementById('file-upload').click();
+});
+
 function handleFeedback() {
 
     const feedback = document.getElementById('feedback');
