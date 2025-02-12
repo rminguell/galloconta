@@ -4,7 +4,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     const baseUrl = 'https://galloconta-419024990899.europe-southwest1.run.app';
 
     const formData = new FormData();
-    formData.append('file', document.getElementById('file').files[0]);
+    formData.append('file', document.getElementById('file-upload').files[0]);
 
     const progress = document.getElementById('progress');
     const result = document.getElementById('result');
