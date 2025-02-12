@@ -54,6 +54,15 @@ button:hover {
 #result img {
     display: block;
     margin: 20px auto;
+    max-width:100%;
+}
+
+#objectCount {
+    text-align: center; 
+    font-size: 1.2em; 
+    font-weight: bold; 
+    color: #4CAF50; 
+    margin-top: 10px; 
 }
 
 #predictions {
@@ -69,7 +78,7 @@ button:hover {
 #progress {
     font-size: 18px;
     margin-top: 50px;
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction: column;
 }
@@ -91,6 +100,7 @@ button:hover {
 }
 
 #feedback, #reload {
+    display:none;
     justify-content: center;
     gap: 20px; 
     margin-top: 20px;
@@ -156,4 +166,16 @@ button:hover {
 .title {
     font-family: 'Arial', sans-serif; 
     color: #333;
+}
+
+footer {
+    margin:40px 20px;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .container {
+        max-width: none;
+        margin: 20px;
+    }
 }

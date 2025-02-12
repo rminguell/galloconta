@@ -11,11 +11,9 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     const feedback = document.getElementById('feedback');
     const upload = document.getElementById('uploadForm');
     const reload = document.getElementById('reload')
+    const objectCount = document.getElementById('objectCount')
 
     progress.style.display = 'flex';
-    result.style.display = 'none';
-    feedback.style.display = 'none';
-    reload.style.display = 'none';
 
     const response = await fetch(baseUrl + '/upload', {
         method: 'POST',
@@ -33,11 +31,13 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
 
     const predictedImagePath = baseUrl + '/output/' + data.result_image.split('/').pop();
     document.getElementById('predictedImage').src = predictedImagePath;
+    document.getElementById('objectCount').innerText = data.object_count + ' grullas';
 
     upload.style.display = 'none';
     progress.style.display = 'none';
     result.style.display = 'block';
     feedback.style.display = 'block';
+    
 
     const predictedFileName = data.result_image.split('/').pop();
 

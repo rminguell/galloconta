@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TSJXQQKN');</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GalloConta</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4RSCNRHFT"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -17,6 +25,9 @@
 
 </head>
 <body>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TSJXQQKN"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    
     <div class="container">
         <header class="header">
             <img src="favicon.png" alt="Logo de GalloConta" class="favicon">
@@ -28,25 +39,34 @@
             <input type="file" id="file" name="file" required>
             <button type="submit">Contar grullas</button>
         </form>
-        <div id="progress" style="display: none;">
+        <div id="progress">
             <div>Procesando la imagen, por favor espera...</div>
             <div class="loader"></div>
         </div>
         <div id="result">
-            <img id="predictedImage" src="" alt="Imagen Predicha" style="max-width:100%;">
-            
-            <div id="feedback" style="display: none;">
+            <img id="predictedImage" src="" alt="Imagen Predicha">
+            <div id="objectCount"></div> 
+            <div id="feedback">
                 <div>¿Te gusta el resultado?</div>
                 <div>
                     <button id="likeButton"><i class="fas fa-thumbs-up"></i>Si</button>
                     <button id="dislikeButton"><i class="fas fa-thumbs-down"></i>No</button>
                 </div>
+                <div>Tu opinión es importante. Las imágenes con valoración negativa serán utilizadas para mejorar la IA de GalloConta</div>
             </div>
-            <div id="reload" style="display: none;">
+            </div>
+            <div id="reload">
                 <button id="reloadButton"><i class="fas fa-sync-alt"></i>Subir otra foto</button>
             </div>
         </div>
     </div>
+
+    <footer>
+        <div>Si tienes cualquier duda o sugerencia, contacta a través de <a href="mailto:rodrigo.minguell@yahoo.com">correo electrónico</a> o <a href="https://www.linkedin.com/in/rodrigo-minguell" target="_blank">LinkedIn</a></div>
+        <br>
+        <div>&copy; 2025 R. Minguell</div>
+    </footer>
+
     
     <script src="script.js"></script>
 </body>

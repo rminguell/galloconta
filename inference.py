@@ -16,8 +16,13 @@ def load_model():
 
 def predict(image_path, conf=config.DEFAULT_CONF, iou=config.DEFAULT_IOU):
     image = cv2.imread(image_path)
+    height, width = image.shape[:2]
+    scale = 2048 / max(height, width)
+    new_width = int(width * scale)
+    new_height = int(height * scale)
+    resized = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA)
     model = load_model()
-    results = model.predict(image, imgsz=2048, max_det=5000, conf=conf, iou=iou)
+    results = model.predict(resized, imgsz=2048, max_det=5000, conf=conf, iou=iou)
 
     for result in results:
         object_count = len(result.boxes.cls)
@@ -27,4 +32,4 @@ def predict(image_path, conf=config.DEFAULT_CONF, iou=config.DEFAULT_IOU):
         output_image_path = image_path.replace('input', 'output')
         cv2.imwrite(output_image_path, annotated_image)
 
-    return output_image_path
+    return output_image_path, object_count

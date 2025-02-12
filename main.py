@@ -38,6 +38,9 @@ def upload_file():
     if file.filename == '':
         return config.NO_FILE_SELECTED, 400
 
+    conf = request.form.get('conf', type=float, default=config.DEFAULT_CONF)
+    iou = request.form.get('iou', type=float, default=config.DEFAULT_IOU)
+    
     clear_folder(config.INPUT_FOLDER)
     clear_folder(config.OUTPUT_FOLDER)
 
@@ -48,11 +51,12 @@ def upload_file():
     file_path = os.path.join(config.INPUT_FOLDER, unique_filename)
     file.save(file_path)
 
-    result_image_path = predict(file_path)
+    result_image_path, object_count = predict(file_path, conf, iou)
 
     return jsonify({
         'input_image': file_path,
         'result_image': result_image_path,
+        'object_count' : object_count,
     })
 
 def upload_file_to_ftp(file_path, file_name):
