@@ -145,7 +145,7 @@ button:hover {
 }
 
 #feedback div {
-    margin-top: 20px;
+    margin: 20px;
     display:flex;
     justify-content: center;
 }
@@ -174,7 +174,7 @@ footer {
 }
 
 .feedback_info {
-    margin-top: 30px;
+    margin-top: 40px!important;
     text-align: center;
     color:grey;
 }
