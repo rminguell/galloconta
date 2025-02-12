@@ -59,7 +59,7 @@ button:hover {
 
 #objectCount {
     text-align: center; 
-    font-size: 1.2em; 
+    font-size: 2em; 
     font-weight: bold; 
     color: #4CAF50; 
     margin-top: 10px; 
@@ -173,7 +173,13 @@ footer {
     text-align: center;
 }
 
-@media (max-width: 900px) {
+.feedback_explanation {
+    margin-top: 30px;
+    text-align: center;
+    color:grey;
+}
+
+@media (max-width: 940px) {
     .container {
         max-width: none;
         margin: 20px;

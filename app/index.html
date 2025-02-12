@@ -37,7 +37,7 @@
         <form id="uploadForm" enctype="multipart/form-data">
             <label for="file">Selecciona un archivo (imagen):</label>
             <input type="file" id="file" name="file" required>
-            <button type="submit">Contar grullas</button>
+            <button id="predictButton" type="submit">Contar grullas</button>
         </form>
         <div id="progress">
             <div>Procesando la imagen, por favor espera...</div>
@@ -52,7 +52,7 @@
                     <button id="likeButton"><i class="fas fa-thumbs-up"></i>Si</button>
                     <button id="dislikeButton"><i class="fas fa-thumbs-down"></i>No</button>
                 </div>
-                <div>Tu opinión es importante. Las imágenes con valoración negativa serán utilizadas para mejorar la IA de GalloConta</div>
+                <div class="feedback_info">Tu opinión es importante. Las imágenes con valoración negativa serán utilizadas para mejorar la IA de GalloConta en el próximo entrenamiento</div>
             </div>
             </div>
             <div id="reload">
