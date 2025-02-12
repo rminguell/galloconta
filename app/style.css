@@ -53,7 +53,7 @@ input[type="file"] {
     display:none;
 }
 
-button {
+button, #select-file-btn {
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
@@ -64,9 +64,10 @@ button {
     text-transform: uppercase;
     font-weight: bold;
     font-size:1em;
+    box-sizing: border-box;
 }
 
-button:hover {
+button:hover, #select-file-btn:hover {
     background-color: #45a049;
 }
 

@@ -1,4 +1,4 @@
-document.getElementById('predictButton').addEventListener('click', async function(e) {
+document.getElementById('uploadForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const baseUrl = 'https://galloconta-419024990899.europe-southwest1.run.app';

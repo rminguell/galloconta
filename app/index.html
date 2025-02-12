@@ -39,18 +39,18 @@
                 <label class="param-label" for="file-upload">Imagen a procesar:</label>
                 <output id="file_name" class="param-output">Ningún archivo seleccionado</output>
                 <input type="file" id="file-upload" hidden>
-                <button for="file-upload" id="select-file-btn"><i class="fas fa-arrow-up"></i> Subir foto</button>
+                <span id="select-file-btn"><i class="fas fa-arrow-up"></i> Subir foto</span>
             </div>
             <div id="advanced_params">
                 <div class="param-container">
                     <label class="param-label" for="param_1">Sensibilidad:</label>
                     <output id="param_1_text" class="param-output">83</output>
-                    <input type="range" id="param_1" class="param-slider" name="param_1" min="0" max="100" value="83">
+                    <input type="range" id="param_1" class="param-slider" name="param_1" min="0" max="100" value="83" disabled>
                 </div>
                 <div class="param-container">
                     <label class="param-label" for="param_2">Eliminar duplicados:</label>
                     <output id="param_2_text" class="param-output">70</output>
-                    <input type="range" id="param_2" class="param-slider" name="param_2" min="0" max="100" value="70">
+                    <input type="range" id="param_2" class="param-slider" name="param_2" min="0" max="100" value="70" disabled>
                 </div>
             </div>
             <button id="predictButton" type="submit">Contar grullas</button>
