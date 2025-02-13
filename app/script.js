@@ -78,19 +78,26 @@ document.getElementById('downloadImageBtn').addEventListener('click', function (
 document.getElementById('downloadImageBtn').addEventListener('click', function () {
     const image = document.getElementById('predictedImage');
     if (image.src) {
-        const link = document.createElement('a');
-        link.href = image.src;
-        link.setAttribute('download', 'resultado.png');
-        link.click();
+        fetch(image.src)
+            .then(response => response.blob())
+            .then(blob => {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'resultado.png';
+                link.click();
+                URL.revokeObjectURL(link.href); // Liberar memoria
+            })
+            .catch(error => console.error('Error al descargar la imagen:', error));
     }
 });
+
 
 document.getElementById('advancedButton').addEventListener('click', function () {
     document.getElementById('show_advanced').style.display = 'none';
     document.getElementById('advanced_params').style.display = 'block';
     document.getElementById('param_1').removeAttribute('disabled');
     document.getElementById('param_2').removeAttribute('disabled');
-    document.getElementById('reloadButton').style.display = 'none';
+    document.getElementById('reload').style.display = 'none';
     document.getElementById('result').style.display = 'none';
     document.getElementById('uploadForm').style.display = 'flex';
 });
@@ -108,6 +115,8 @@ function handleFeedback(like) {
 }
 
 async function sendFeedback(url, like, fileName) {
+    handleFeedback(like)
+
     const response = await fetch(url + '/feedback', {
         method: 'POST',
         headers: {
@@ -118,9 +127,6 @@ async function sendFeedback(url, like, fileName) {
 
     if (!response.ok) {
         console.error('Error al enviar feedback:', response.statusText);
-        alert('No se pudo registrar el feedback.');
         return;
-    } else {
-        handleFeedback(like)
     }
 }
