@@ -1,10 +1,12 @@
-document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+document.getElementById('predictButton').addEventListener('click', async function(e) {
     e.preventDefault();
 
     const baseUrl = 'https://galloconta-419024990899.europe-southwest1.run.app';
 
     const formData = new FormData();
     formData.append('file', document.getElementById('file-upload').files[0]);
+    formData.append('param_1', document.getElementById('param_1').value);
+    formData.append('param_2', document.getElementById('param_2').value);
 
     const progress = document.getElementById('progress');
     const result = document.getElementById('result');
@@ -67,15 +69,20 @@ document.getElementById('select-file-btn').addEventListener('click', function() 
 
 document.getElementById('downloadImageBtn').addEventListener('click', function () {
     const image = document.getElementById('predictedImage');
-    
+
     if (image.src) {
         window.open(image.src, '_blank');
     }
 });
 
-document.getElementById('reloadButton').addEventListener('click', function () { 
-    document.getElementById('file-upload').value = '';
-    location.reload();
+document.getElementById('downloadImageBtn').addEventListener('click', function () {
+    const image = document.getElementById('predictedImage');
+    if (image.src) {
+        const link = document.createElement('a');
+        link.href = image.src;
+        link.setAttribute('download', 'resultado.png');
+        link.click();
+    }
 });
 
 document.getElementById('advancedButton').addEventListener('click', function () {
