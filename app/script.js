@@ -67,7 +67,29 @@ document.getElementById('select-file-btn').addEventListener('click', function() 
     document.getElementById('file-upload').click();
 });
 
-function handleFeedback() {
+document.getElementById('downloadImageBtn').addEventListener('click', function () {
+    const image = document.getElementById('predictedImage');
+    if (image.src) {
+        const link = document.createElement('a');
+        link.href = image.src;
+        link.download = 'resultado.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+});
+
+document.getElementById('advancedButton').addEventListener('click', function () {
+    document.getElementById('show_advanced').style.display = 'none';
+    document.getElementById('advanced_params').style.display = 'block';
+    document.getElementById('param_1').removeAttribute('disabled');
+    document.getElementById('param_2').removeAttribute('disabled');
+    document.getElementById('reloadButton').style.display = 'none';
+    document.getElementById('result').style.display = 'none';
+    document.getElementById('uploadForm').style.display = 'flex';
+});
+
+function handleFeedback(like) {
 
     const feedback = document.getElementById('feedback');
     feedback.style.display = 'none';
@@ -75,6 +97,10 @@ function handleFeedback() {
     const reload= document.getElementById('reload');
     reload.style.display ='flex';
     document.getElementById('reloadButton').onclick = () => location.reload();
+
+    if (!like) {
+        document.getElementById('show_advanced').style.display = 'flex'
+    }
 }
 
 async function sendFeedback(url, like, fileName) {
@@ -91,6 +117,6 @@ async function sendFeedback(url, like, fileName) {
         alert('No se pudo registrar el feedback.');
         return;
     } else {
-        handleFeedback()
+        handleFeedback(like)
     }
 }

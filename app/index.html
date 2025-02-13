@@ -13,7 +13,7 @@
     <title>GalloConta</title>
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4RSCNRHFT"></script>
     <script>
@@ -39,7 +39,7 @@
                 <label class="param-label" for="file-upload">Imagen a procesar:</label>
                 <output id="file_name" class="param-output">Ningún archivo seleccionado</output>
                 <input type="file" id="file-upload" hidden>
-                <span id="select-file-btn"><i class="fas fa-arrow-up"></i> Subir foto</span>
+                <span id="select-file-btn"><i class="fas fa-upload"></i>Subir foto</span>
             </div>
             <div id="advanced_params">
                 <div class="param-container">
@@ -61,6 +61,9 @@
         </div>
         <div id="result">
             <img id="predictedImage" src="" alt="Imagen Predicha">
+            <button id="downloadImageBtn" class="download-btn">
+                <i class="fas fa-download"></i>
+            </button>
             <div id="objectCount"></div> 
             <div id="feedback">
                 <div>¿Te gusta el resultado?</div>
@@ -70,6 +73,9 @@
                 </div>
                 <div class="feedback_info">Tu opinión es importante. Las imágenes con valoración negativa serán utilizadas para mejorar la IA de GalloConta en el próximo entrenamiento</div>
             </div>
+            </div>
+            <div id="show_advanced">
+                <button id="advancedButton"><i class="fa-solid fa-sliders"></i>Ajustar parámetros</button>
             </div>
             <div id="reload">
                 <button id="reloadButton"><i class="fas fa-sync-alt"></i>Subir otra foto</button>
