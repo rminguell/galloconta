@@ -69,14 +69,6 @@ document.getElementById('select-file-btn').addEventListener('click', function() 
 
 document.getElementById('downloadImageBtn').addEventListener('click', function () {
     const image = document.getElementById('predictedImage');
-
-    if (image.src) {
-        window.open(image.src, '_blank');
-    }
-});
-
-document.getElementById('downloadImageBtn').addEventListener('click', function () {
-    const image = document.getElementById('predictedImage');
     if (image.src) {
         fetch(image.src)
             .then(response => response.blob())
@@ -85,10 +77,15 @@ document.getElementById('downloadImageBtn').addEventListener('click', function (
                 link.href = URL.createObjectURL(blob);
                 link.download = 'resultado.png';
                 link.click();
-                URL.revokeObjectURL(link.href); // Liberar memoria
+                URL.revokeObjectURL(link.href);
             })
             .catch(error => console.error('Error al descargar la imagen:', error));
     }
+});
+
+document.getElementById('reloadButton').addEventListener('click', function () { 
+    document.getElementById('file-upload').value = '';
+    location.reload();
 });
 
 
