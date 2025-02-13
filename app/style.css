@@ -90,18 +90,6 @@ button:hover, #select-file-btn:hover {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
-}
-
-.download-btn:hover {
-    background: rgba(0, 0, 0, 0.9);
 }
 
 #objectCount {

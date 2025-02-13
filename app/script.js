@@ -43,8 +43,6 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
 
     document.getElementById('likeButton').onclick = () => sendFeedback(baseUrl, true, predictedFileName);
     document.getElementById('dislikeButton').onclick = () => sendFeedback(baseUrl, false, predictedFileName);
-
-    document.getElementById('file').value = '';
 });
 
 document.getElementById('param_1').addEventListener('input', function() {
@@ -79,6 +77,11 @@ document.getElementById('downloadImageBtn').addEventListener('click', function (
     }
 });
 
+document.getElementById('reloadButton').addEventListener('click', function () { 
+    document.getElementById('file-upload').value = '';
+    location.reload();
+});
+
 document.getElementById('advancedButton').addEventListener('click', function () {
     document.getElementById('show_advanced').style.display = 'none';
     document.getElementById('advanced_params').style.display = 'block';
@@ -90,13 +93,11 @@ document.getElementById('advancedButton').addEventListener('click', function () 
 });
 
 function handleFeedback(like) {
-
     const feedback = document.getElementById('feedback');
     feedback.style.display = 'none';
 
     const reload= document.getElementById('reload');
     reload.style.display ='flex';
-    document.getElementById('reloadButton').onclick = () => location.reload();
 
     if (!like) {
         document.getElementById('show_advanced').style.display = 'flex'
