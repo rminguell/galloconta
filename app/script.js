@@ -67,13 +67,9 @@ document.getElementById('select-file-btn').addEventListener('click', function() 
 
 document.getElementById('downloadImageBtn').addEventListener('click', function () {
     const image = document.getElementById('predictedImage');
+    
     if (image.src) {
-        const link = document.createElement('a');
-        link.href = image.src;
-        link.download = 'resultado.png';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        window.open(image.src, '_blank');
     }
 });
 
