@@ -27,67 +27,72 @@
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TSJXQQKN"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    
     <div class="container">
+        <div class="language-selector">
+            <select id="language-dropdown" onchange="changeLanguage(event)">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+            </select>
+        </div>        
         <header class="header">
             <img src="favicon.png" alt="Logo de GalloConta" class="favicon">
-            <h1 class="title">GalloConta</h1>
+            <h1 class="title" id="title"></h1>
         </header>
-        <h2>Calcula cuántas grullas hay en una imagen</h2>
+        <h2 id="subtitle"></h2>      
         <form id="uploadForm" enctype="multipart/form-data">
             <div class="param-container">
-                <label class="param-label" for="file-upload">Imagen a procesar:</label>
-                <output id="file_name" class="param-output">Ningún archivo seleccionado</output>
+                <label class="param-label" for="file-upload" id="file_upload_label"></label>
+                <output id="file_name" class="param-output" id="file_name_text"></output>
                 <input type="file" id="file-upload" hidden>
-                <span id="select-file-btn"><i class="fas fa-upload"></i>Subir foto</span>
+                <span id="select-file-btn"><i class="fas fa-upload"></i><span id="select_file_btn"></span></span>
             </div>
             <div id="advanced_params">
                 <div class="param-container">
-                    <label class="param-label" for="param_1">Sensibilidad:</label>
+                    <label class="param-label" for="param_1" id="sensitivity_label"></label>
                     <output id="param_1_text" class="param-output">83</output>
                     <input type="range" id="param_1" class="param-slider" name="param_1" min="0" max="100" value="83" disabled>
                 </div>
                 <div class="param-container">
-                    <label class="param-label" for="param_2">Eliminar duplicados:</label>
+                    <label class="param-label" for="param_2" id="remove_duplicates_label"></label>
                     <output id="param_2_text" class="param-output">70</output>
                     <input type="range" id="param_2" class="param-slider" name="param_2" min="0" max="100" value="70" disabled>
                 </div>
             </div>
-            <button id="predictButton" type="submit">Contar grullas</button>
+            <button id="predictButton" type="submit" id="predict_button"></button>
         </form>
         <div id="progress">
-            <div>Procesando la imagen, por favor espera...</div>
+            <div id="processing_text"></div>
             <div class="loader"></div>
         </div>
         <div id="result">
             <img id="predictedImage" src="" alt="Imagen Predicha">
-            <button id="downloadImageBtn" class="download-btn"><i class="fas fa-download"></i>Guardar</button>
+            <button id="downloadImageBtn" class="download-btn"><i class="fas fa-download"></i><span id="save_button"></span></button>
             <div id="objectCount"></div> 
             <div id="feedback">
-                <div>¿Te gusta el resultado?</div>
+                <div id="feedback_text"></div>
                 <div>
-                    <button id="likeButton"><i class="fas fa-thumbs-up"></i>Si</button>
-                    <button id="dislikeButton"><i class="fas fa-thumbs-down"></i>No</button>
+                    <button id="likeButton"><i class="fas fa-thumbs-up"></i><span id="like_button"></span></button>
+                    <button id="dislikeButton"><i class="fas fa-thumbs-down"></i><span id="dislike_button"></span></button>
                 </div>
-                <div class="feedback_info">Tu opinión es importante. Las imágenes con valoración negativa serán utilizadas para mejorar la IA de GalloConta en el próximo entrenamiento</div>
+                <div class="feedback_info" id="feedback_info"></div>
             </div>
             </div>
             <div id="show_advanced">
-                <button id="advancedButton"><i class="fa-solid fa-sliders"></i>Ajustar parámetros</button>
+                <button id="advancedButton"><i class="fa-solid fa-sliders"></i><span id="adjust_button"></span></button>
             </div>
             <div id="reload">
-                <button id="reloadButton"><i class="fas fa-sync-alt"></i>Subir otra foto</button>
+                <button id="reloadButton"><i class="fas fa-sync-alt"></i><span id="reload_button"></span></button>
             </div>
         </div>
     </div>
 
     <footer>
-        <div>Si tienes cualquier duda o sugerencia, contacta a través de <a href="mailto:rodrigo.minguell@yahoo.com">correo electrónico</a> o <a href="https://www.linkedin.com/in/rodrigo-minguell" target="_blank">LinkedIn</a></div>
+        <div id="footer_contact"></div>
         <br>
-        <div>&copy; 2025 R. Minguell</div>
+        <div id="footer_copy"></div>
     </footer>
 
-    
     <script src="script.js"></script>
+    <script src="translations.js"></script>
 </body>
 </html>

@@ -18,6 +18,33 @@ h2 {
     text-align: center;
 }
 
+.language-selector {
+    display: flex;
+    justify-content: flex-end; 
+}
+
+#language-dropdown {
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+#language-dropdown:hover {
+    border-color:black;
+}
+
+#language-dropdown:focus {
+    outline: none;
+    border-color: black;
+}
+
 form {
     margin-top:50px;
     display: flex;
