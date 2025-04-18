@@ -10,7 +10,7 @@ OUTPUT_FOLDER = './output'
 MODEL_FOLDER = './model'
 
 # CORS Configuration
-CORS_ORIGINS = ["https://galloconta-419024990899.europe-southwest1.run.app/", "https://rminguell.github.io"]
+CORS_ORIGINS = ["https://galloconta-419024990899.europe-southwest1.run.app/", "https://rminguell.github.io", "https://galloconta.vercel.app"]
 
 # Error and Status Messages
 UPLOAD_ERROR = "No file found in the request."
