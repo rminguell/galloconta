@@ -2,7 +2,6 @@ import cv2
 import os
 import shutil
 from ultralytics import YOLO
-from ultralytics.utils.plotting import Annotator
 import kagglehub
 import config
 
@@ -24,22 +23,25 @@ def load_model(update=False):
     
     return YOLO(local_model_path)
 
-def predict(image_path, conf=config.DEFAULT_CONF, iou=config.DEFAULT_IOU):
+def predict(image_path, conf=config.DEFAULT_CONF, iou=config.DEFAULT_IOU, annotated = False):
     image = cv2.imread(image_path)
     height, width = image.shape[:2]
     scale = 2048 / max(height, width)
     new_width = int(width * scale)
     new_height = int(height * scale)
     resized = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_AREA)
+
     model = load_model()
     results = model.predict(resized, imgsz=2048, max_det=5000, conf=conf, iou=iou)
 
     for result in results:
         object_count = len(result.boxes.cls)
-        annotator = Annotator(resized, line_width=5)
-        annotator.text_label((0, 0, 400, 100), label=f'{object_count} grullas', margin=10)
         annotated_image = result.plot(show=False, labels=False, line_width=1)
+        
+        if annotated:
+            cv2.putText(annotated_image, object_count, (30, 80), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 4, cv2.LINE_AA)
+
         output_image_path = image_path.replace('input', 'output')
         cv2.imwrite(output_image_path, annotated_image)
 
-    return output_image_path, object_count
+        return output_image_path, object_count
