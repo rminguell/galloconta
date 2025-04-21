@@ -18,4 +18,4 @@ app.include_router(upload.router)
 app.include_router(feedback.router)
 app.include_router(update.router)
 
-app.mount("/", StaticFiles(directory="app/static", html=True), name="static")
+#app.mount("/", StaticFiles(directory="app/static", html=True), name="static")
