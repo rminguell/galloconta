@@ -1,8 +1,10 @@
 import os
+import shutil
+import kagglehub
 from fastapi import HTTPException, Depends
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from ftpretty import ftpretty
-from app.config import config
+import app.config as config
 
 security = HTTPBasic()
 
@@ -34,3 +36,21 @@ def upload_file_to_ftp(file_path, file_name):
     except Exception as e:
         print(f"{config.FTP_UPLOAD_ERROR} {file_name} - {e}")
         return None
+
+def download_model():
+    model_path = kagglehub.model_download(config.MODEL_NAME, force_download=True)
+    print(f"{config.DOWNLOAD_MSG} {model_path}")
+    return model_path
+
+def get_model(update=False):
+    local_model_path = f"{config.MODEL_FOLDER}/{config.MODEL_FILE_NAME}.pt"
+    
+    if update or not os.path.exists(local_model_path):
+        downloaded_model_dir = download_model()
+        downloaded_model_file = f"{downloaded_model_dir}/{config.MODEL_FILE_NAME}.pt"
+
+        if os.path.exists(downloaded_model_file):
+            os.makedirs(os.path.dirname(local_model_path), exist_ok=True)
+            shutil.move(downloaded_model_file, local_model_path)
+    
+    return local_model_path

@@ -3,8 +3,8 @@ import time
 from fastapi import APIRouter, UploadFile, Form
 from fastapi.responses import JSONResponse, FileResponse
 from app.inference import predict
-from app.config import config
 from app.dependencies import clear_folder
+import app.config as config
 
 router = APIRouter()
 

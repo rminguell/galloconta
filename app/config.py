@@ -3,6 +3,8 @@ MODEL_NAME = 'rminguell/grulla/pyTorch/default'
 MODEL_FILE_NAME = 'GRULLA'
 DEFAULT_CONF = 0.17
 DEFAULT_IOU = 0.3
+IMAGE_SIZE = 2048
+MAX_DETECTION = 5000
 
 # File Directories
 INPUT_FOLDER = './input'
