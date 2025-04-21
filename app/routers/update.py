@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
-from ..inference import load_model
-from ..dependencies import authenticate
+from app.inference import load_model
+from app.dependencies import authenticate
 
 router = APIRouter()
 

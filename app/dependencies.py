@@ -2,7 +2,7 @@ import os
 from fastapi import HTTPException, Depends
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from ftpretty import ftpretty
-import config
+from app.config import config
 
 security = HTTPBasic()
 

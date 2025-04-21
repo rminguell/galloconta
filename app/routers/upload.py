@@ -2,9 +2,9 @@ import os
 import time
 from fastapi import APIRouter, UploadFile, Form
 from fastapi.responses import JSONResponse, FileResponse
-from inference import predict
-import config
-from dependencies import clear_folder
+from app.inference import predict
+from app.config import config
+from app.dependencies import clear_folder
 
 router = APIRouter()
 

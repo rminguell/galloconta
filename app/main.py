@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from routers import upload, feedback, update
-import config
+from app.routers import upload, feedback, update
+from app.config import config
 
 app = FastAPI()
 

@@ -1,7 +1,7 @@
 import os
 from fastapi import APIRouter, Request
-from dependencies import upload_file_to_ftp
-from ..config import config
+from app.dependencies import upload_file_to_ftp
+from app.config import config
 
 router = APIRouter()
 

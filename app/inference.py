@@ -3,7 +3,7 @@ import os
 import shutil
 from ultralytics import YOLO
 import kagglehub
-import config
+from app.config import config
 
 def download_model():
     model_path = kagglehub.model_download(config.MODEL_NAME, force_download=True)
