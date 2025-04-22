@@ -11,7 +11,8 @@ This app helps automate crane counting, aiding researchers and conservationists 
 - [Dataset](#dataset)
 - [Model](#model)
 - [Architecture](#architecture)
-- [API endpoints](#api-endpoints) 
+- [API Endpoints](#api-endpoints) 
+- [User Interface](#user-interface)
 - [Video inference](#video-inference)
 - [Acknowledgements](#acknowledgements)
 
