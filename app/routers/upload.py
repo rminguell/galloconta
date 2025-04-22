@@ -20,6 +20,9 @@ async def upload_file(
     conf = 1 - param_1 / 100
     iou = 1 - param_2 / 100
 
+    os.makedirs(config.INPUT_FOLDER, exist_ok=True)
+    os.makedirs(config.OUTPUT_FOLDER, exist_ok=True)
+
     clear_folder(config.INPUT_FOLDER)
     clear_folder(config.OUTPUT_FOLDER)
 
