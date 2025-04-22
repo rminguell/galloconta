@@ -4,23 +4,14 @@ The lake is one of Spain’s most important bird sanctuaries. It serves as a cri
 
 This app helps automate crane counting, aiding researchers and conservationists in tracking the species with greater efficiency and accuracy.
 
-<br>
-
-<div align="center">
-  <a href="https://rminguell.github.io/galloconta/app">
-    <img src="./img/button.png" alt="TRY DEMO">
-  </a>
-</div>
-
-<br>
-
 ![Detection Result](./img/detection.jpg)
 
 ## Contents
 
 - [Dataset](#dataset)
 - [Model](#model)
-- [Deploy](#deploy)
+- [Architecture](#architecture)
+- [API endpoints](#api-endpoints) 
 - [Video inference](#video-inference)
 - [Acknowledgements](#acknowledgements)
 
@@ -93,13 +84,27 @@ Ultralytics 8.3.65 🚀 Python-3.11.11 torch-2.5.1+cu121 CUDA:0 (NVIDIA A100-SXM
                    all         19       2103      0.936      0.831       0.89      0.666
 ```
 
-## Deploy
 
-The app is deployed on **Google Cloud Run**, creating a real-time API endpoint that allows users to upload images and receive crane counting predictions quickly. This cloud-based solution ensures scalability and easy updates.
+## Architecture
+The application is built with [FastAPI](https://fastapi.tiangolo.com/), a modern, high-performance web framework for building APIs with Python. It is deployed on Google Cloud Run, enabling fast, scalable, and serverless execution.
 
-## Video inference
+## API Endpoints
+The app provides three real-time endpoints:
 
-Here is the code used for video inference:
+**/upload** – Users can upload images to receive crane counting predictions.
+
+**/feedback** – Users can submit feedback on the accuracy of the predictions.
+
+**/update** – The model can be updated automatically from Kaggle, integrating the latest training improvements.
+
+## User Interface
+A simple and responsive web interface is available in the [galloconta-client](https://github.com/rminguell/galloconta-client) repository on **GitHub**. Built with **Next.js** and deployed on **Vercel**, it allows users to upload images, view predictions with zoom, adjust model parameters, and submit feedback—all connected seamlessly to the FastAPI backend.
+
+You can try it live at: [galloconta.vercel.app](https://galloconta.vercel.app)
+
+## Video Inference
+
+Here is the code used for video inference demo:
 
 ```python
 from ultralytics import YOLO
@@ -151,16 +156,7 @@ cv2.destroyAllWindows()
 
 Thanks to the photographers who donated images for the dataset:
 
-- [Uge Fuertes](https://www.instagram.com/ugefuertessanz/)
-- [Jaime D García](https://www.instagram.com/jaimemalagafotos)
+- [Uge Fuertes Sanz](https://www.instagram.com/ugefuertessanz/)
+- [Jaime Díaz García](https://www.instagram.com/jaimemalagafotos)
 - [Asociación Amigos de Gallocanta](https://www.instagram.com/amigosgallocanta/)
 
-<br>
-
-<div align="center">
-  <a href="https://rminguell.github.io/galloconta/app">
-    <img src="./img/button.png" alt="TRY DEMO">
-  </a>
-</div>
-
-<br>
