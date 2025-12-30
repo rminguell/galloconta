@@ -187,6 +187,14 @@ uvicorn backend.main:app --reload
 
 ```bash
 cd frontend
+npm install
+npm run dev
+```
+
+Or with pnpm:
+
+```bash
+cd frontend
 pnpm install
 pnpm dev
 ```
