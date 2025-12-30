@@ -1,0 +1,38 @@
+{   
+  "title": {
+    "title": "GalloConta",
+    "description": "AI-powered crane counting app"
+  },
+  "home": {
+    "title": "GalloConta",
+    "contact": "If you have any questions or suggestions, contact via",
+    "e_mail": "email",
+    "or": "or",
+    "copy": "© 2025 R. Minguell"
+  },
+  "upload": {
+    "start":"Calculate how many cranes are in an image",
+    "drag": "Drag and drop or click to upload",
+    "limit": "Max file size",
+    "predict": "Count cranes",
+    "reset": "Upload another image",
+    "crane": "crane",
+    "cranes": "cranes",
+    "format_error": "Only image files are allowed",
+    "size_error ": "File must be smaller than ",
+    "prediction_error": "Processing error. Please try again.",
+    "download": "Download"
+  },
+  "params": {
+    "sensitivity": "Sensitivity",
+    "duplicates": "Remove duplicates",
+    "adjust": "Adjust parameters",
+    "predict": "Count cranes"
+  },
+  "feedback": {
+    "question": "Do you like the result?",
+    "yes": "Yes",
+    "no": "No",
+    "info": "Your feedback is important. Images with negative feedback will be used to improve GalloConta's AI in the next training"
+  }
+}

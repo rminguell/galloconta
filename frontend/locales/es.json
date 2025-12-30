@@ -1,0 +1,38 @@
+{
+  "title": {
+    "title": "GalloConta",
+    "description": "App de conteo de grullas basada en IA"
+  },
+  "home": {
+    "title": "GalloConta",
+    "contact": "Si tienes cualquier duda o sugerencia, contacta a través de",
+    "e_mail": "correo electrónico",
+    "or": "o",
+    "copy": "© 2025 R. Minguell"
+  },
+  "upload": {
+    "start": "Calcula cuántas grullas hay en una imagen",
+    "drag": "Arrastra o haz clic para subir un archivo",
+    "limit": "Tamaño máximo",
+    "predict": "Contar grullas",
+    "reset": "Subir otra imagen",
+    "crane": "grulla",
+    "cranes": "grullas",
+    "format_error": "Solo se permiten archivos de imagen",
+    "size_error ": "El archivo debe pesar menos de ",
+    "prediction_error": "Error al procesar. Inténtalo de nuevo.",
+    "download": "Descargar"
+  },
+  "params": {
+    "sensitivity": "Sensibilidad",
+    "duplicates": "Eliminar duplicados",
+    "adjust": "Ajustar parámetros",
+    "predict": "Contar grullas"
+  },
+  "feedback": {
+    "question": "¿Te gusta el resultado?",
+    "yes": "Sí",
+    "no": "No",
+    "info": "Tu opinión es importante. Las imágenes con valoración negativa serán utilizadas para mejorar la IA de GalloConta en el próximo entrenamiento"
+  }
+}
