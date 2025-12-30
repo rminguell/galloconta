@@ -4,4 +4,4 @@ steps:
 - name: 'gcr.io/cloudbuild/docker'
   args: ['push', 'europe-southwest1-docker.pkg.dev/grulla-447217/cloud-run-source-deploy/galloconta']
 - name: 'gcr.io/cloudbuild/python'
-  args: ['-t', 'europe-southwest1-docker.pkg.dev/grulla-447217/cloud-run-source-deploy/galloconta', '--entrypoint', 'pip', 'install', '-r', 'requirements.txt']
+  args: ['-t', 'europe-southwest1-docker.pkg.dev/grulla-447217/cloud-run-source-deploy/galloconta', '--entrypoint', 'pip', 'install', '-r', 'backend/requirements.txt']

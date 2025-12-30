@@ -8,8 +8,9 @@ This project follows Clean Architecture in both backend and frontend.
 
 ```
 galloconta/
-├── app/                           # Backend (FastAPI)
+├── backend/                       # Backend (FastAPI)
 │   ├── main.py                   # Application entry point
+│   ├── requirements.txt          # Python dependencies
 │   ├── core/
 │   │   ├── __init__.py
 │   │   └── config.py             # Settings: model config, folders, CORS
@@ -81,9 +82,8 @@ galloconta/
 ├── training/                      # Reserved for model training code
 │   └── .gitkeep
 │
-├── Procfile                       # Cloud Run: gunicorn app.main:app
+├── Procfile                       # Cloud Run: gunicorn backend.main:app
 ├── cloudbuild.yaml               # Google Cloud Build pipeline
-├── requirements.txt              # Python dependencies
 ├── README.md                     # Project documentation
 └── claude.md                     # This file
 ```
@@ -126,7 +126,7 @@ galloconta/
 
 ### Entry Point
 
-`app/main.py` exports `app` (FastAPI instance). Referenced by Procfile as `app.main:app`.
+`backend/main.py` exports `app` (FastAPI instance). Referenced by Procfile as `backend.main:app`.
 
 ### Environment Variables
 
@@ -179,8 +179,8 @@ galloconta/
 ### Backend
 
 ```bash
-pip install -r requirements.txt
-uvicorn app.main:app --reload
+pip install -r backend/requirements.txt
+uvicorn backend.main:app --reload
 ```
 
 ### Frontend
