@@ -10,8 +10,9 @@ This app helps automate crane counting, aiding researchers and conservationists 
 
 - [Dataset](#dataset)
 - [Model](#model)
+- [Development](#development)
 - [Architecture](#architecture)
-- [API Endpoints](#api-endpoints) 
+- [API Endpoints](#api-endpoints)
 - [User Interface](#user-interface)
 - [Video inference](#video-inference)
 - [Acknowledgements](#acknowledgements)
@@ -85,6 +86,46 @@ Ultralytics 8.3.65 🚀 Python-3.11.11 torch-2.5.1+cu121 CUDA:0 (NVIDIA A100-SXM
                    all         19       2103      0.936      0.831       0.89      0.666
 ```
 
+
+## Development
+
+### Backend (Docker)
+
+1. Create a `.env` file in the `deploy/` directory with your credentials:
+
+```env
+KAGGLE_USERNAME=your_kaggle_username
+KAGGLE_KEY=your_kaggle_api_key
+FTP_HOST=your_ftp_host
+FTP_USER=your_ftp_user
+FTP_PASS=your_ftp_pass
+BASIC_AUTH_USER=admin
+BASIC_AUTH_PASS=admin
+```
+
+> Get your Kaggle API credentials from https://www.kaggle.com/settings/account (API section → Create New Token)
+
+2. Start the backend:
+
+```bash
+cd deploy
+docker compose -f docker-compose.local.yml up --build
+```
+
+The API will be available at http://localhost:8000
+
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend will be available at http://localhost:3000
 
 ## Architecture
 The application is built with [FastAPI](https://fastapi.tiangolo.com/), a modern, high-performance web framework for building APIs with Python. It is deployed on Google Cloud Run, enabling fast, scalable, and serverless execution.
