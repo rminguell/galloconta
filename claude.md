@@ -10,7 +10,6 @@ This project follows Clean Architecture in both backend and frontend.
 galloconta/
 ├── backend/                       # Backend (FastAPI)
 │   ├── main.py                   # Application entry point
-│   ├── requirements.txt          # Python dependencies
 │   ├── core/
 │   │   ├── __init__.py
 │   │   └── config.py             # Settings: model config, folders, CORS
@@ -82,6 +81,7 @@ galloconta/
 ├── training/                      # Reserved for model training code
 │   └── .gitkeep
 │
+├── requirements.txt               # Python dependencies
 ├── Procfile                       # Cloud Run: gunicorn backend.main:app
 ├── cloudbuild.yaml               # Google Cloud Build pipeline
 ├── README.md                     # Project documentation
@@ -176,10 +176,50 @@ galloconta/
 
 ## Development
 
-### Backend
+### Backend (Docker)
 
 ```bash
-pip install -r backend/requirements.txt
+cd deploy
+docker compose -f docker-compose.local.yml up --build
+```
+
+Backend runs at: **http://localhost:8000**
+
+API docs available at:
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+#### Test Endpoints
+
+```bash
+# Health check (upload form)
+curl http://localhost:8000/docs
+
+# Upload image for detection
+curl -X POST http://localhost:8000/upload \
+  -F "file=@image.jpg" \
+  -F "confidence=0.5" \
+  -F "iou=0.5"
+
+# Get input image
+curl http://localhost:8000/input/{filename}
+
+# Get output image (with detections)
+curl http://localhost:8000/output/{filename}
+
+# Submit feedback
+curl -X POST http://localhost:8000/feedback \
+  -F "filename={filename}" \
+  -F "feedback=like"
+
+# Update model (requires auth)
+curl -u admin:admin http://localhost:8000/update
+```
+
+### Backend (without Docker)
+
+```bash
+pip install -r requirements.txt
 uvicorn backend.main:app --reload
 ```
 
