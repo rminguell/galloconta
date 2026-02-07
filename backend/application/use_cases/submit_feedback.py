@@ -8,7 +8,9 @@ class SubmitFeedbackUseCase:
         self._feedback_storage = feedback_storage
         self._file_storage = file_storage
 
-    def execute(self, like: bool, file_name: str) -> tuple[bool, str]:
+    def execute(
+        self, like: bool, file_name: str, conf: float, iou: float
+    ) -> tuple[bool, str]:
         if like:
             return True, "Feedback received."
 
@@ -17,7 +19,9 @@ class SubmitFeedbackUseCase:
         if not self._file_storage.file_exists(source_path):
             return True, "Feedback received."
 
-        upload_success = self._feedback_storage.upload(source_path, file_name)
+        upload_success = self._feedback_storage.upload(
+            source_path, file_name, conf, iou, "negative"
+        )
 
         if upload_success:
             return True, "Feedback received and file uploaded."

@@ -8,7 +8,9 @@ class FileStorage(Protocol):
 
 
 class FeedbackStorage(Protocol):
-    def upload(self, file_path: str, file_name: str) -> bool: ...
+    def upload(
+        self, file_path: str, file_name: str, conf: float, iou: float, feedback: str
+    ) -> bool: ...
 
 
 class ModelRepository(Protocol):

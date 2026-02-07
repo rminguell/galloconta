@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Request, Depends
 from fastapi.responses import JSONResponse
+from backend.core.config import settings
 from backend.presentation.dependencies import get_submit_feedback_use_case
 from backend.application.use_cases.submit_feedback import SubmitFeedbackUseCase
 
@@ -17,8 +18,12 @@ async def feedback(
 
     like = data["like"]
     file_name = data["fileName"]
+    param_1 = data.get("param_1", 100 * (1 - settings.DEFAULT_CONF))
+    param_2 = data.get("param_2", 100 * (1 - settings.DEFAULT_IOU))
+    conf = 1 - param_1 / 100
+    iou = 1 - param_2 / 100
 
-    success, message = use_case.execute(like, file_name)
+    success, message = use_case.execute(like, file_name, conf, iou)
 
     if success:
         return {"message": message}

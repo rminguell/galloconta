@@ -1,7 +1,7 @@
 from backend.infrastructure.ml.model_loader import KaggleModelLoader
 from backend.infrastructure.ml.yolo_predictor import YOLOPredictor
 from backend.infrastructure.persistence.file_storage import LocalFileStorage
-from backend.infrastructure.persistence.ftp_storage import FTPFeedbackStorage
+from backend.infrastructure.persistence.platform_storage import PlatformFeedbackStorage
 from backend.application.use_cases.predict_image import PredictImageUseCase
 from backend.application.use_cases.submit_feedback import SubmitFeedbackUseCase
 from backend.application.use_cases.update_model import UpdateModelUseCase
@@ -15,8 +15,8 @@ def get_file_storage() -> LocalFileStorage:
     return LocalFileStorage()
 
 
-def get_feedback_storage() -> FTPFeedbackStorage:
-    return FTPFeedbackStorage()
+def get_feedback_storage() -> PlatformFeedbackStorage:
+    return PlatformFeedbackStorage()
 
 
 def get_predictor() -> YOLOPredictor:
