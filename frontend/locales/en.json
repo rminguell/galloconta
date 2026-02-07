@@ -5,9 +5,9 @@
   },
   "home": {
     "title": "GalloConta",
-    "contact": "If you have any questions or suggestions, contact via",
-    "e_mail": "email",
-    "or": "or",
+    "citizen_science": "If you want to contribute to the citizen science project, visit",
+    "contact": "Questions or suggestions:",
+    "developed_by": "Developed by",
     "copy": "© 2025 R. Minguell"
   },
   "upload": {

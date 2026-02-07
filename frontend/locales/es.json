@@ -5,9 +5,9 @@
   },
   "home": {
     "title": "GalloConta",
-    "contact": "Si tienes cualquier duda o sugerencia, contacta a través de",
-    "e_mail": "correo electrónico",
-    "or": "o",
+    "citizen_science": "Si quieres contribuir al proyecto de ciencia ciudadana, visita",
+    "contact": "Para dudas o sugerencias:",
+    "developed_by": "Desarrollado por",
     "copy": "© 2025 R. Minguell"
   },
   "upload": {

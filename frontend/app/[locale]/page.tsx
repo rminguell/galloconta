@@ -24,22 +24,43 @@ export default function Home() {
         <Uploader />
       </div>
       <p className="font-light text-gray-600 w-full max-w-lg text-center mt-6 px-4">
+        {t("citizen_science")}{" "}
+        <Link
+          href="https://lab.galloconta.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium underline underline-offset-4 hover:text-black transition-colors"
+        >
+          lab.galloconta.app
+        </Link>
+      </p>
+      <p className="font-light text-gray-600 w-full max-w-lg text-center mt-2 px-4">
         {t("contact")}{" "}
         <Link
-          href="mailto:rodrigo.minguell@yahoo.com"
+          href="mailto:galloconta@entibo.es"
           className="font-medium underline underline-offset-4 hover:text-black transition-colors"
         >
-          {t("e_mail")}
-        </Link>{" "}
-        {t("or")}{" "}
-        <Link
-          href="https://www.linkedin.com/in/rodrigo-minguell"
-          className="font-medium underline underline-offset-4 hover:text-black transition-colors"
-        >
-          LinkedIn
-        </Link>{" "}
+          galloconta@entibo.es
+        </Link>
       </p>
-      <p className="font-light text-gray-600 w-full max-w-lg text-center mt-6">
+      <div className="flex items-center gap-2 mt-8">
+        <span className="text-sm text-gray-400">{t("developed_by")}</span>
+        <Link
+          href="https://entibo.es"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="opacity-70 hover:opacity-100 transition-opacity"
+        >
+          <Image
+            src="/entibo-logo.png"
+            alt="Entibo"
+            width={120}
+            height={27}
+            className="h-5 w-auto"
+          />
+        </Link>
+      </div>
+      <p className="font-light text-gray-400 text-xs text-center mt-3 mb-4">
         {t("copy")}
       </p>
     </main>
