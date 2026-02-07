@@ -14,6 +14,7 @@ class Settings:
         "https://galloconta.vercel.app",
         "https://galloconta.app",
         "https://www.galloconta.app",
+        "https://dev.galloconta.app",
         "http://localhost:3000",
         "http://localhost:3001",
     ]
