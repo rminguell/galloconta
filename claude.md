@@ -30,7 +30,7 @@ galloconta/
 │   │   │   └── yolo_predictor.py # YOLOPredictor: YOLO inference implementation
 │   │   ├── persistence/
 │   │   │   ├── file_storage.py   # LocalFileStorage: local file operations
-│   │   │   └── ftp_storage.py    # FTPFeedbackStorage: uploads feedback images to FTP
+│   │   │   └── platform_storage.py # PlatformFeedbackStorage: uploads feedback images to galloconta-platform API
 │   │   └── security/
 │   │       └── basic_auth.py     # HTTP Basic authentication
 │   └── presentation/
@@ -101,12 +101,12 @@ galloconta/
 
 3. **application/**: Use cases
    - `PredictImageUseCase`: Orchestrates image upload and prediction
-   - `SubmitFeedbackUseCase`: Handles user feedback and FTP upload
+   - `SubmitFeedbackUseCase`: Handles user feedback and uploads to galloconta-platform API
    - `UpdateModelUseCase`: Downloads latest model from Kaggle
 
 4. **infrastructure/**: External implementations
    - `ml/`: Machine learning (YOLO inference, Kaggle model loading)
-   - `persistence/`: Storage (local files, FTP)
+   - `persistence/`: Storage (local files, galloconta-platform API)
    - `security/`: Authentication (HTTP Basic)
 
 5. **presentation/**: HTTP API
@@ -134,9 +134,8 @@ galloconta/
 |----------|-------------|
 | `BASIC_AUTH_USER` | Username for /update endpoint |
 | `BASIC_AUTH_PASS` | Password for /update endpoint |
-| `FTP_HOST` | FTP server hostname |
-| `FTP_USER` | FTP username |
-| `FTP_PASS` | FTP password |
+| `PLATFORM_API_URL` | galloconta-platform API base URL |
+| `PLATFORM_API_TOKEN` | Bearer token for galloconta-platform API |
 
 ## Frontend (Next.js)
 
@@ -241,13 +240,24 @@ pnpm dev
 
 ## Deployment
 
-- **Backend**: Google Cloud Run
-  - Build: `cloudbuild.yaml`
-  - Runtime: `Procfile` with gunicorn + uvicorn worker
+### Backend (Google Cloud Run)
 
-- **Frontend**: Vercel
-  - Config: `vercel.json`
-  - Build: `pnpm turbo build`
+Despliegue automático via Cloud Build triggers:
+
+| Rama | Servicio | URL |
+|------|----------|-----|
+| `main` | galloconta | https://galloconta-419024990899.europe-southwest1.run.app |
+| `dev` | galloconta-dev | https://galloconta-dev-419024990899.europe-southwest1.run.app |
+
+Al hacer `git push` a cualquiera de estas ramas, Cloud Build construye y despliega automáticamente.
+
+- Build: `cloudbuild.yaml`
+- Runtime: `Procfile` with gunicorn + uvicorn worker
+
+### Frontend (Vercel)
+
+- Config: `vercel.json`
+- Build: `pnpm turbo build`
 
 ## Model
 
