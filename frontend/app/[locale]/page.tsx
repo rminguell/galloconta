@@ -27,6 +27,9 @@ export default async function Home({
         />
         {t("title")}
       </h1>
+      <p className="font-light text-gray-700 w-full max-w-xl text-center mb-8 px-4">
+        {t("tagline")}
+      </p>
       <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
         <Uploader />
       </div>

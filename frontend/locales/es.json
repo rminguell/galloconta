@@ -1,14 +1,20 @@
 {
   "title": {
-    "title": "GalloConta",
-    "description": "App de conteo de grullas basada en IA"
+    "title": "GalloConta — Conteo de grullas con IA a partir de una foto",
+    "description": "GalloConta cuenta grullas comunes (Grus grus) a partir de una foto usando IA."
   },
   "home": {
     "title": "GalloConta",
+    "tagline": "Sube una foto de una bandada de grullas y obtén al instante un conteo con IA.",
     "citizen_science": "Si quieres contribuir al proyecto de ciencia ciudadana, visita",
     "contact": "Para dudas o sugerencias:",
     "developed_by": "Desarrollado por",
     "copy": "© 2025 R. Minguell"
+  },
+  "cookies": {
+    "message": "Usamos Google Analytics para entender cómo se usa GalloConta. No se comparte ningún dato hasta que lo aceptas.",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
   },
   "upload": {
     "start": "Calcula cuántas grullas hay en una imagen",

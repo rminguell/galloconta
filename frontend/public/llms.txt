@@ -1,0 +1,31 @@
+# GalloConta
+
+> AI-powered computer vision tool that counts common cranes (Grus grus) from a photo. Built by
+> [Entibo](https://entibo.es).
+
+## App
+
+- [GalloConta (Spanish)](https://galloconta.app/es): upload a photo of a crane flock and get an
+  instant AI-powered count, adjust detection sensitivity, and give feedback on each prediction.
+- [GalloConta (English)](https://galloconta.app/en): same app, English interface.
+
+## Model
+
+GalloConta Community runs on **GRULLA**, a YOLOv11 model fine-tuned on a hand-annotated dataset of
+crane flock photos. See the [GitHub repository](https://github.com/rminguell/galloconta) for the
+full model card, training details, and metrics (93.6% precision / 0.89 mAP50 on the test set).
+
+## Citizen science
+
+- [lab.galloconta.app](https://lab.galloconta.app): donate crane photos, help annotate images in
+  CVAT, or join as a volunteer to help grow the training dataset — no prior experience needed.
+
+## Source code
+
+- [github.com/rminguell/galloconta](https://github.com/rminguell/galloconta): open-source backend
+  (FastAPI + YOLOv11) and frontend (Next.js). Self-hostable — see the README for configuration.
+
+## Contact
+
+- [galloconta@entibo.es](mailto:galloconta@entibo.es)
+- [Entibo](https://entibo.es): the company behind GalloConta.

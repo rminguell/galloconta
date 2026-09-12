@@ -1,8 +1,6 @@
-**GalloConta** is a computer vision tool created to monitor the crane population at the Gallocanta Lake.
+**GalloConta** is a computer vision tool that counts common cranes (*Grus grus*) from a photo, aiding researchers and conservationists in tracking the species with greater efficiency and accuracy.
 
-The lake is one of Spain’s most important bird sanctuaries. It serves as a critical stop for cranes during their migration. 
-
-This app helps automate crane counting, aiding researchers and conservationists in tracking the species with greater efficiency and accuracy.
+It was born on the shores of the Gallocanta Lake, in Aragón, Spain — one of the country's most important bird sanctuaries and a critical stop for cranes during their migration.
 
 ![Detection Result](./img/detection.jpg)
 

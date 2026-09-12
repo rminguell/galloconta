@@ -1,24 +1,65 @@
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
-import {setRequestLocale} from 'next-intl/server';
+import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
+import type {Metadata} from 'next';
 import {routing} from '@/i18n/routing';
+import AnalyticsConsent from '@/presentation/components/features/analytics-consent';
 import './globals.css';
 import { Inter } from 'next/font/google';
 
-export const metadata = {
-  title: 'GalloConta',
-  description: 'AI-powered crane counting app',
-};
-
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({locale}));
-}
+const SITE_URL = 'https://galloconta.app';
 
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
   display: 'swap',
 });
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({locale}));
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: Promise<{locale: string}>;
+}): Promise<Metadata> {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: 'title'});
+  const title = t('title');
+  const description = t('description');
+  const ogLocale = locale === 'es' ? 'es_ES' : 'en_US';
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title,
+    description,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        es: '/es',
+        en: '/en',
+        'x-default': '/es'
+      }
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${SITE_URL}/${locale}`,
+      siteName: 'GalloConta',
+      images: [{url: '/og-image.jpg', width: 1200, height: 799}],
+      locale: ogLocale,
+      alternateLocale: ogLocale === 'es_ES' ? 'en_US' : 'es_ES',
+      type: 'website'
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/og-image.jpg']
+    }
+  };
+}
 
 export default async function LocaleLayout({
   children,
@@ -34,34 +75,55 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
+  const t = await getTranslations({locale, namespace: 'title'});
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        name: 'GalloConta',
+        url: SITE_URL,
+        description: t('description'),
+        inLanguage: locale,
+        publisher: {'@id': `${SITE_URL}/#entibo`}
+      },
+      {
+        '@type': 'SoftwareApplication',
+        name: 'GalloConta',
+        applicationCategory: 'Computer vision / wildlife monitoring',
+        operatingSystem: 'Any (web-based)',
+        url: SITE_URL,
+        description: t('description'),
+        offers: {'@type': 'Offer', price: '0', priceCurrency: 'EUR'},
+        publisher: {'@id': `${SITE_URL}/#entibo`}
+      },
+      {
+        '@type': 'Organization',
+        '@id': `${SITE_URL}/#entibo`,
+        name: 'Entibo',
+        url: 'https://entibo.es',
+        sameAs: [
+          'https://lab.galloconta.app',
+          'https://github.com/rminguell/galloconta'
+        ]
+      }
+    ]
+  };
+
   return (
     <html lang={locale}>
       <head>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-TSJXQQKN');
-          `
-        }} />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G4RSCNRHFT"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-G4RSCNRHFT');
-          `
-        }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
+        />
       </head>
       <body>
-        <noscript>
-          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TSJXQQKN"
-                  height="0" width="0" style={{display: 'none', visibility: 'hidden'}}></iframe>
-        </noscript>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          {children}
+          <AnalyticsConsent />
+        </NextIntlClientProvider>
       </body>
     </html>
   );
