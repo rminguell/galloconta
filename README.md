@@ -21,6 +21,12 @@ This app helps automate crane counting, aiding researchers and conservationists 
 
 ## Dataset
 
+> This section, and [Model](#model) below, describe **GRULLA**: the crane-detection model that
+> powers the free, publicly-hosted **GalloConta Community** instance at
+> [galloconta.app](https://galloconta.app). The backend can load any Kaggle Hub model via the
+> `MODEL_NAME` variable (see [Configuration](#configuration)) — GRULLA is just the one this repo
+> ships with by default, not the only one it can run.
+
 The dataset consists of 165 images of crane flocks donated by local nature photographers. The images, each 2048x2048 pixels, are split into three subsets:  
 - **113 training images**
 - **33 validation images**
@@ -36,7 +42,7 @@ If you want to explore CVAT, you can follow the installation guide here:
 
 ## Model
 
-The app uses our **GRULLA** model, based on the YOLOv11 architecture, for detecting and counting cranes. YOLO is an advanced object detection model known for its accuracy and speed in real-time applications.
+The GalloConta Community deployment uses our **GRULLA** model, based on the YOLOv11 architecture, for detecting and counting cranes. YOLO is an advanced object detection model known for its accuracy and speed in real-time applications.
 
 ### Model Training:
 Here is the code used for training the model:
