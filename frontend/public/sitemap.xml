@@ -5,6 +5,7 @@
     <loc>https://galloconta.app/es</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://galloconta.app/es"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://galloconta.app/en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://galloconta.app/zh"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://galloconta.app/es"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
@@ -13,6 +14,16 @@
     <loc>https://galloconta.app/en</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://galloconta.app/es"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://galloconta.app/en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://galloconta.app/zh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://galloconta.app/es"/>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://galloconta.app/zh</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://galloconta.app/es"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://galloconta.app/en"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://galloconta.app/zh"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://galloconta.app/es"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>

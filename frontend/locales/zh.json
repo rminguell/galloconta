@@ -1,0 +1,44 @@
+{
+  "title": {
+    "title": "GalloConta — 用AI从照片中计数灰鹤",
+    "description": "GalloConta 使用人工智能，通过一张照片自动计数灰鹤（Grus grus）。"
+  },
+  "home": {
+    "title": "GalloConta",
+    "tagline": "上传一张鹤群照片，即可获得AI实时计数结果。",
+    "citizen_science": "如果你想参与公民科学项目，请访问",
+    "contact": "如有疑问或建议：",
+    "developed_by": "开发者",
+    "copy": "© 2025 R. Minguell"
+  },
+  "cookies": {
+    "message": "我们使用用量分析。",
+    "accept": "接受",
+    "reject": "拒绝"
+  },
+  "upload": {
+    "start": "计算图片中有多少只鹤",
+    "drag": "拖放或点击上传文件",
+    "limit": "最大文件大小",
+    "predict": "计数灰鹤",
+    "reset": "上传另一张图片",
+    "crane": "只鹤",
+    "cranes": "只鹤",
+    "format_error": "只允许上传图片文件",
+    "size_error ": "文件大小不能超过 ",
+    "prediction_error": "处理出错，请重试。",
+    "download": "下载"
+  },
+  "params": {
+    "sensitivity": "灵敏度",
+    "duplicates": "去除重复",
+    "adjust": "调整参数",
+    "predict": "计数灰鹤"
+  },
+  "feedback": {
+    "question": "你喜欢这个结果吗？",
+    "yes": "是",
+    "no": "否",
+    "info": "你的反馈很重要。评价为负面的图片将用于改进GalloConta下一轮AI训练"
+  }
+}

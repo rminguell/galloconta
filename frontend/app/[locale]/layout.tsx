@@ -9,6 +9,12 @@ import { Inter } from 'next/font/google';
 
 const SITE_URL = 'https://galloconta.app';
 
+const OG_LOCALES: Record<string, string> = {
+  es: 'es_ES',
+  en: 'en_US',
+  zh: 'zh_CN'
+};
+
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
@@ -28,7 +34,7 @@ export async function generateMetadata({
   const t = await getTranslations({locale, namespace: 'title'});
   const title = t('title');
   const description = t('description');
-  const ogLocale = locale === 'es' ? 'es_ES' : 'en_US';
+  const ogLocale = OG_LOCALES[locale] ?? 'en_US';
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -39,6 +45,7 @@ export async function generateMetadata({
       languages: {
         es: '/es',
         en: '/en',
+        zh: '/zh',
         'x-default': '/es'
       }
     },
@@ -49,7 +56,7 @@ export async function generateMetadata({
       siteName: 'GalloConta',
       images: [{url: '/og-image.jpg', width: 1200, height: 799}],
       locale: ogLocale,
-      alternateLocale: ogLocale === 'es_ES' ? 'en_US' : 'es_ES',
+      alternateLocale: routing.locales.filter((l) => l !== locale).map((l) => OG_LOCALES[l]),
       type: 'website'
     },
     twitter: {
