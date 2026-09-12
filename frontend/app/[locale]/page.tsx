@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import Uploader from "@/presentation/components/features/uploader";
 import LanguageSwitcher from "@/presentation/components/features/language-switcher";
+import Footer from "@/presentation/components/features/footer";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export default async function Home({
@@ -33,46 +33,7 @@ export default async function Home({
       <div className="bg-white/30 p-12 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
         <Uploader />
       </div>
-      <p className="font-light text-gray-600 w-full max-w-lg text-center mt-6 px-4">
-        {t("citizen_science")}{" "}
-        <Link
-          href="https://lab.galloconta.app"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-medium underline underline-offset-4 hover:text-black transition-colors"
-        >
-          lab.galloconta.app
-        </Link>
-      </p>
-      <p className="font-light text-gray-600 w-full max-w-lg text-center mt-2 px-4">
-        {t("contact")}{" "}
-        <Link
-          href="mailto:galloconta@entibo.es"
-          className="font-medium underline underline-offset-4 hover:text-black transition-colors"
-        >
-          galloconta@entibo.es
-        </Link>
-      </p>
-      <div className="flex items-center gap-2 mt-8">
-        <span className="text-sm text-gray-400">{t("developed_by")}</span>
-        <Link
-          href="https://entibo.es"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="opacity-70 hover:opacity-100 transition-opacity"
-        >
-          <Image
-            src="/entibo-logo.png"
-            alt="Entibo"
-            width={120}
-            height={27}
-            className="h-5 w-auto"
-          />
-        </Link>
-      </div>
-      <p className="font-light text-gray-400 text-xs text-center mt-3 mb-4">
-        {t("copy")}
-      </p>
+      <Footer t={t} />
     </main>
   );
 }

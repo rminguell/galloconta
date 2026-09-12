@@ -62,18 +62,18 @@ export default function AnalyticsConsent() {
       )}
 
       {hydrated && consent === null && (
-        <div className="fixed bottom-0 inset-x-0 z-50 bg-white/95 backdrop-blur border-t border-gray-200 px-4 py-3 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm text-gray-700">
-          <p className="text-center sm:text-left max-w-xl">{t("message")}</p>
+        <div className="fixed bottom-3 inset-x-3 sm:inset-x-auto sm:left-3 sm:max-w-sm z-50 bg-white shadow-lg ring-1 ring-gray-900/10 rounded-xl px-4 py-3 flex flex-wrap items-center gap-3 text-sm text-gray-600">
+          <p className="flex-1 min-w-[180px]">{t("message")}</p>
           <div className="flex gap-2 shrink-0">
             <button
               onClick={() => decide("denied")}
-              className="px-3 py-1 rounded-md bg-gray-100 hover:bg-gray-200"
+              className="px-3 py-1.5 rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700"
             >
               {t("reject")}
             </button>
             <button
               onClick={() => decide("granted")}
-              className="px-3 py-1 rounded-md bg-black text-white hover:bg-gray-800"
+              className="px-3 py-1.5 rounded-md bg-black text-white hover:bg-gray-800"
             >
               {t("accept")}
             </button>
