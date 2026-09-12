@@ -274,3 +274,7 @@ Thanks to the photographers who donated images for the dataset:
 - [Jaime Díaz García](https://www.instagram.com/jaimemalagafotos)
 - [Asociación Amigos de Gallocanta](https://www.instagram.com/amigosgallocanta/)
 
+Want to help grow the dataset yourself? **[lab.galloconta.app](https://lab.galloconta.app)** is our
+citizen-science platform — donate crane photos, help annotate images, or just follow along as a
+volunteer, no prior experience needed.
+
