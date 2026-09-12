@@ -15,6 +15,7 @@ It was born on the shores of the Gallocanta Lake, in Aragón, Spain — one of t
 - [API Endpoints](#api-endpoints)
 - [User Interface](#user-interface)
 - [Video inference](#video-inference)
+- [License](#license)
 - [Acknowledgements](#acknowledgements)
 
 ## Dataset
@@ -269,6 +270,12 @@ cap.release()
 video_writer.release()
 cv2.destroyAllWindows()
 ```
+
+## License
+
+[MIT](./LICENSE) for the source code. The graphic and media assets in this repository (photos,
+screenshots, logos — including `img/` and `frontend/public/`) are not covered and are not licensed for
+reuse.
 
 ## Acknowledgements
 
