@@ -11,6 +11,7 @@ This app helps automate crane counting, aiding researchers and conservationists 
 - [Dataset](#dataset)
 - [Model](#model)
 - [Development](#development)
+- [Configuration](#configuration)
 - [Architecture](#architecture)
 - [API Endpoints](#api-endpoints)
 - [User Interface](#user-interface)
@@ -96,14 +97,14 @@ Ultralytics 8.3.65 🚀 Python-3.11.11 torch-2.5.1+cu121 CUDA:0 (NVIDIA A100-SXM
 ```env
 KAGGLE_USERNAME=your_kaggle_username
 KAGGLE_KEY=your_kaggle_api_key
-FTP_HOST=your_ftp_host
-FTP_USER=your_ftp_user
-FTP_PASS=your_ftp_pass
 BASIC_AUTH_USER=admin
 BASIC_AUTH_PASS=admin
 ```
 
 > Get your Kaggle API credentials from https://www.kaggle.com/settings/account (API section → Create New Token)
+
+See [Configuration](#configuration) below for every other variable (which model to load, allowed
+frontend origins, optional feedback upload to an external platform).
 
 2. Start the backend:
 
@@ -126,6 +127,30 @@ pnpm dev
 ```
 
 The frontend will be available at http://localhost:3000
+
+## Configuration
+
+Everything that changes between a deployment — which model to serve, which frontends may call the
+API, whether to feed feedback into an external platform — is an environment variable. There's no
+license-key check in the code: what you get to run is whatever configuration values you set.
+
+### Backend
+
+| Variable | Default | Description |
+|----------|---------|--------------|
+| `MODEL_NAME` | `rminguell/grulla/pyTorch/default` | Kaggle Hub model slug to download and serve. Point this at your own trained model to run something other than the public GRULLA one. |
+| `CORS_ORIGINS` | `galloconta.app`, `www.galloconta.app`, `dev.galloconta.app`, `localhost:3000`, `localhost:3001` | Comma-separated list of frontend origins allowed to call this backend. |
+| `KAGGLE_USERNAME` / `KAGGLE_KEY` | — | Credentials to download the model from Kaggle Hub. |
+| `BASIC_AUTH_USER` / `BASIC_AUTH_PASS` | `admin` / `admin` | Credentials for the protected `/update` endpoint (re-downloads the model). |
+| `PLATFORM_API_URL` / `PLATFORM_API_TOKEN` | — (optional) | Only needed if you want negative feedback images uploaded to an external platform (e.g. to grow a training dataset). Feedback submission still works without these — the upload is just skipped. |
+| `DEFAULT_CONF` / `DEFAULT_IOU` / `IMAGE_SIZE` / `MAX_DETECTION` | `0.17` / `0.3` / `2048` / `5000` | Inference defaults. |
+
+### Frontend (build time)
+
+| Variable | Description |
+|----------|--------------|
+| `NEXT_PUBLIC_BACKEND_URL` | Base URL of the backend this UI talks to. The single most important variable if you're pointing the frontend at someone else's hosted inference instead of your own. |
+| `NEXT_PUBLIC_MAX_UPLOAD_MB` | Client-side upload size limit. |
 
 ## Architecture
 The backend is built with [FastAPI](https://fastapi.tiangolo.com/), a modern, high-performance web framework for building APIs with Python. It is deployed on Google Cloud Run, enabling fast, scalable, and serverless execution.

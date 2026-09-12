@@ -10,9 +10,10 @@ services:
     environment:
       - BASIC_AUTH_USER=${BASIC_AUTH_USER:-admin}
       - BASIC_AUTH_PASS=${BASIC_AUTH_PASS:-admin}
-      - FTP_HOST=${FTP_HOST:-}
-      - FTP_USER=${FTP_USER:-}
-      - FTP_PASS=${FTP_PASS:-}
       - KAGGLE_USERNAME=${KAGGLE_USERNAME:-}
       - KAGGLE_KEY=${KAGGLE_KEY:-}
+      - MODEL_NAME=${MODEL_NAME:-}
+      - CORS_ORIGINS=${CORS_ORIGINS:-}
+      - PLATFORM_API_URL=${PLATFORM_API_URL:-}
+      - PLATFORM_API_TOKEN=${PLATFORM_API_TOKEN:-}
     command: uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
