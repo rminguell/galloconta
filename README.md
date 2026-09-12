@@ -95,66 +95,72 @@ Ultralytics 8.3.65 🚀 Python-3.11.11 torch-2.5.1+cu121 CUDA:0 (NVIDIA A100-SXM
 
 ## Development
 
+Runs both pieces with hot-reload, for actively working on the code.
+
 ### Backend (Docker)
 
-1. Create a `.env` file in the `deploy/` directory with your credentials:
+1. Copy the env template and fill in your own values:
 
-```env
-KAGGLE_USERNAME=your_kaggle_username
-KAGGLE_KEY=your_kaggle_api_key
-BASIC_AUTH_USER=admin
-BASIC_AUTH_PASS=admin
-```
+   ```bash
+   cp deploy/.env.example deploy/.env
+   ```
 
-> Get your Kaggle API credentials from https://www.kaggle.com/settings/account (API section → Create New Token)
+   At minimum, set `KAGGLE_USERNAME`/`KAGGLE_KEY` (get them from
+   https://www.kaggle.com/settings/account → API → Create New Token) and pick your own
+   `BASIC_AUTH_USER`/`BASIC_AUTH_PASS` (protects the `/update` endpoint — don't leave these blank).
+   Everything else in `deploy/.env` is optional; see [Configuration](#configuration) for the full list
+   (which model to load, allowed frontend origins, optional feedback upload to an external platform).
 
-See [Configuration](#configuration) below for every other variable (which model to load, allowed
-frontend origins, optional feedback upload to an external platform).
+2. Start the backend — `docker compose` picks up `deploy/.env` automatically because it's run from
+   that same directory:
 
-2. Start the backend:
+   ```bash
+   cd deploy
+   docker compose -f docker-compose.local.yml up --build
+   ```
 
-```bash
-cd deploy
-docker compose -f docker-compose.local.yml up --build
-```
+   The API is now available at http://localhost:8000 (Swagger UI at `/docs`, ReDoc at `/redoc`).
 
-The API will be available at http://localhost:8000
+### Frontend (pnpm)
 
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
+1. Copy the env template:
 
-### Frontend
+   ```bash
+   cd frontend
+   cp .env.example .env.local
+   ```
 
-```bash
-cd frontend
-pnpm install
-pnpm dev
-```
+   `.env.local` is read automatically by Next.js and is already gitignored. Set
+   `NEXT_PUBLIC_BACKEND_URL=http://localhost:8000` to point it at the backend from step above.
 
-The frontend will be available at http://localhost:3000
+2. Install and run:
+
+   ```bash
+   pnpm install
+   pnpm dev
+   ```
+
+   The frontend is now available at http://localhost:3000.
 
 ## Local deployment
 
 This runs both pieces the way they run in production — built artifacts, no hot-reload — entirely on
 your own machine. Useful to try a self-hosted setup (your own model, your own domain) before putting
-it on real hardware.
+it on real hardware. Do the `deploy/.env` / `frontend/.env.local` setup from [Development](#development)
+first if you haven't already.
 
 ### Backend
 
 Build the image (build context is the repo root, since the Dockerfile also needs `requirements.txt`)
-and run it with whichever configuration you want — see [Configuration](#configuration) for every
-variable:
+and run it with the same `deploy/.env` file from above:
 
 ```bash
 docker build -f backend/Dockerfile -t galloconta-backend .
-docker run -p 8000:8000 \
-  -e KAGGLE_USERNAME=your_kaggle_username \
-  -e KAGGLE_KEY=your_kaggle_api_key \
-  -e MODEL_NAME=rminguell/grulla/pyTorch/default \
-  galloconta-backend
+docker run -p 8000:8000 --env-file deploy/.env galloconta-backend
 ```
 
-The API is now available at http://localhost:8000, serving whichever model `MODEL_NAME` points to.
+The API is now available at http://localhost:8000, serving whichever model `MODEL_NAME` points to
+(the public GRULLA one, if you didn't set `MODEL_NAME` in `deploy/.env`).
 
 ### Frontend
 
@@ -164,12 +170,12 @@ static file server will do:
 ```bash
 cd frontend
 pnpm install
-NEXT_PUBLIC_BACKEND_URL=http://localhost:8000 pnpm build
+pnpm build
 npx serve out
 ```
 
-`NEXT_PUBLIC_BACKEND_URL` is baked in at build time — point it at the backend you just started (or at
-someone else's hosted instance) before running `pnpm build`.
+`NEXT_PUBLIC_BACKEND_URL` (from `frontend/.env.local`) is baked in at build time — point it at the
+backend you just started, or at someone else's hosted instance, before running `pnpm build`.
 
 ## Configuration
 
@@ -184,7 +190,7 @@ license-key check in the code: what you get to run is whatever configuration val
 | `MODEL_NAME` | `rminguell/grulla/pyTorch/default` | Kaggle Hub model slug to download and serve. Point this at your own trained model to run something other than the public GRULLA one. |
 | `CORS_ORIGINS` | `galloconta.app`, `www.galloconta.app`, `dev.galloconta.app`, `localhost:3000`, `localhost:3001` | Comma-separated list of frontend origins allowed to call this backend. |
 | `KAGGLE_USERNAME` / `KAGGLE_KEY` | — | Credentials to download the model from Kaggle Hub. |
-| `BASIC_AUTH_USER` / `BASIC_AUTH_PASS` | `admin` / `admin` | Credentials for the protected `/update` endpoint (re-downloads the model). |
+| `BASIC_AUTH_USER` / `BASIC_AUTH_PASS` | — (required) | Credentials for the protected `/update` endpoint (re-downloads the model). No code-level default — pick your own. |
 | `PLATFORM_API_URL` / `PLATFORM_API_TOKEN` | — (optional) | Only needed if you want negative feedback images uploaded to an external platform (e.g. to grow a training dataset). Feedback submission still works without these — the upload is just skipped. |
 | `DEFAULT_CONF` / `DEFAULT_IOU` / `IMAGE_SIZE` / `MAX_DETECTION` | `0.17` / `0.3` / `2048` / `5000` | Inference defaults. |
 
