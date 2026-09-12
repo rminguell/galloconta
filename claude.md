@@ -42,9 +42,12 @@ galloconta/
 │           ├── feedback.py       # POST /feedback
 │           └── update.py         # GET /update (protected)
 │
-├── frontend/                      # Frontend (Next.js 15)
+├── frontend/                      # Frontend (Next.js 15, static export)
 │   ├── app/
-│   │   └── [locale]/             # i18n dynamic routing
+│   │   ├── (root)/               # Locale-less "/" — static meta-refresh to /es/
+│   │   │   ├── layout.tsx        # Own root layout (no shared html/body with [locale])
+│   │   │   └── page.tsx
+│   │   └── [locale]/             # i18n static routing (en/es, generateStaticParams)
 │   │       ├── layout.tsx        # Root layout with analytics
 │   │       ├── page.tsx          # Home page
 │   │       └── globals.css       # Global styles
@@ -73,9 +76,8 @@ galloconta/
 │   │       │   └── language-switcher.tsx # EN/ES language toggle
 │   │       └── ui/
 │   │           └── zoomable-image.tsx # Image with zoom capability
-│   ├── i18n/                     # Internationalization config
+│   ├── i18n/                     # Internationalization config (routing, request config)
 │   ├── locales/                  # Translation files (en.json, es.json)
-│   ├── middleware.ts             # i18n middleware
 │   └── [config files]            # next.config.js, tailwind.config.js, etc.
 │
 ├── training/                      # Reserved for model training code
@@ -166,6 +168,20 @@ galloconta/
 - Image zoom preview
 - User feedback collection
 
+### Static export (`output: 'export'`)
+
+The frontend builds to a fully static site (no Node server, no middleware) — production is served
+from a CDN. This has two consequences for `app/[locale]/*`:
+
+- Every `layout.tsx`/`page.tsx` under `[locale]` must call `setRequestLocale(locale)` (from
+  `next-intl/server`) before reading any translation, and use `getTranslations` (not the
+  `useTranslations` hook) in `async` Server Components — without this, next-intl can't resolve the
+  correct locale at build time since there's no request-time middleware to infer it from.
+- The locale-less `/` route lives in its own route group, `app/(root)/`, with its own root layout
+  (Next.js "multiple root layouts" pattern) that does a static `<meta http-equiv="refresh">` to
+  `/es/` — a real HTTP-level `redirect()` isn't available without a server, and this works even with
+  JS disabled.
+
 ### Environment Variables
 
 | Variable | Description |
@@ -254,10 +270,13 @@ Al hacer `git push` a cualquiera de estas ramas, Cloud Build construye y desplie
 - Build: `cloudbuild.yaml`
 - Runtime: `Procfile` with gunicorn + uvicorn worker
 
-### Frontend (Vercel)
+### Frontend (static export behind a CDN)
 
-- Config: `vercel.json`
-- Build: `pnpm turbo build`
+`pnpm build` produces a static site in `frontend/out/` (`output: 'export'` in `next.config.js`) —
+no server runtime needed in production. It's published to https://galloconta.app by a build
+pipeline in the companion `galloconta-platform` repo, which checks out this repo's `main`/`dev`
+branch at build time and uploads the export to a CDN. This repo itself has no deploy credentials
+or infrastructure config — it only needs to keep producing a valid static export.
 
 ## Model
 

@@ -1,4 +1,5 @@
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
+import {setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import './globals.css';
@@ -8,6 +9,10 @@ export const metadata = {
   title: 'GalloConta',
   description: 'AI-powered crane counting app',
 };
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({locale}));
+}
 
 const inter = Inter({
   variable: '--font-inter',
@@ -26,6 +31,8 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+
+  setRequestLocale(locale);
 
   return (
     <html lang={locale}>
@@ -59,4 +66,3 @@ export default async function LocaleLayout({
     </html>
   );
 }
-

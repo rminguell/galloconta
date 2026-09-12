@@ -121,14 +121,16 @@ The API will be available at http://localhost:8000
 
 ```bash
 cd frontend
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 The frontend will be available at http://localhost:3000
 
 ## Architecture
-The application is built with [FastAPI](https://fastapi.tiangolo.com/), a modern, high-performance web framework for building APIs with Python. It is deployed on Google Cloud Run, enabling fast, scalable, and serverless execution.
+The backend is built with [FastAPI](https://fastapi.tiangolo.com/), a modern, high-performance web framework for building APIs with Python. It is deployed on Google Cloud Run, enabling fast, scalable, and serverless execution.
+
+The frontend (Next.js, in `frontend/`) is built as a static export (`output: 'export'`) and served as a plain static site behind a CDN — no Node server involved in production. All API calls happen client-side against the Cloud Run backend, so any static host works.
 
 ## API Endpoints
 The app provides three real-time endpoints:
@@ -140,9 +142,9 @@ The app provides three real-time endpoints:
 **/update** – The model can be updated automatically from Kaggle, integrating the latest training improvements.
 
 ## User Interface
-A simple and responsive web interface is available in the [galloconta-client](https://github.com/rminguell/galloconta-client) repository on **GitHub**. Built with **Next.js** and deployed on **Vercel**, it allows users to upload images, view predictions with zoom, adjust model parameters, and submit feedback—all connected seamlessly to the FastAPI backend.
+A simple and responsive web interface lives in [`frontend/`](./frontend), built with **Next.js** (App Router) and **next-intl** for English/Spanish support. It allows users to upload images, view predictions with zoom, adjust model parameters, and submit feedback — all connected client-side to the FastAPI backend.
 
-You can try it live at: [galloconta.vercel.app](https://galloconta.vercel.app)
+You can try it live at: [galloconta.app](https://galloconta.app)
 
 ## Video Inference
 

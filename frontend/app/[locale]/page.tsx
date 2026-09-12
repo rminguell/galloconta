@@ -2,10 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import Uploader from "@/presentation/components/features/uploader";
 import LanguageSwitcher from "@/presentation/components/features/language-switcher";
-import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export default function Home() {
-  const t = useTranslations("home");
+export default async function Home({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations("home");
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center">
