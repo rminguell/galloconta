@@ -11,6 +11,7 @@ This app helps automate crane counting, aiding researchers and conservationists 
 - [Dataset](#dataset)
 - [Model](#model)
 - [Development](#development)
+- [Local deployment](#local-deployment)
 - [Configuration](#configuration)
 - [Architecture](#architecture)
 - [API Endpoints](#api-endpoints)
@@ -127,6 +128,44 @@ pnpm dev
 ```
 
 The frontend will be available at http://localhost:3000
+
+## Local deployment
+
+This runs both pieces the way they run in production — built artifacts, no hot-reload — entirely on
+your own machine. Useful to try a self-hosted setup (your own model, your own domain) before putting
+it on real hardware.
+
+### Backend
+
+Build the image (build context is the repo root, since the Dockerfile also needs `requirements.txt`)
+and run it with whichever configuration you want — see [Configuration](#configuration) for every
+variable:
+
+```bash
+docker build -f backend/Dockerfile -t galloconta-backend .
+docker run -p 8000:8000 \
+  -e KAGGLE_USERNAME=your_kaggle_username \
+  -e KAGGLE_KEY=your_kaggle_api_key \
+  -e MODEL_NAME=rminguell/grulla/pyTorch/default \
+  galloconta-backend
+```
+
+The API is now available at http://localhost:8000, serving whichever model `MODEL_NAME` points to.
+
+### Frontend
+
+The frontend builds to a static export (`output: 'export'`) — no Node server needed to run it, any
+static file server will do:
+
+```bash
+cd frontend
+pnpm install
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8000 pnpm build
+npx serve out
+```
+
+`NEXT_PUBLIC_BACKEND_URL` is baked in at build time — point it at the backend you just started (or at
+someone else's hosted instance) before running `pnpm build`.
 
 ## Configuration
 
