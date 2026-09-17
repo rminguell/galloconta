@@ -40,6 +40,9 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title,
     description,
+    verification: {
+      google: 'LNdGC1eip7YfZzPeaaFm799VzlhZAPiCha7KU7uXYQY'
+    },
     alternates: {
       canonical: `/${locale}`,
       languages: {
